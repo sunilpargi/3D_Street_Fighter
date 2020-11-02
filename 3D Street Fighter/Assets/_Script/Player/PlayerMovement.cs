@@ -13,18 +13,20 @@ public class PlayerMovement : MonoBehaviour
     private float rotation_Y = -90f;
     private float rotation_Speed = 15f;
 
+    private CharaterAnimation player_Anim;
+
     // Start is called before the first frame update
     void Awake()
     {
         myBody = GetComponent<Rigidbody>();
-        //player_Anim = GetComponentInChildren<CharacterAnimation>();
+        player_Anim = GetComponentInChildren<CharaterAnimation>();
     }
 
     // Update is called once per frame
     void Update()
     {
         RotatePlayer();
-       // AnimatePlayerWalk();
+        AnimatePlayerWalk();
     }
 
     void FixedUpdate()
@@ -59,4 +61,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
     } // rotation
+
+    void AnimatePlayerWalk()
+    {
+
+        if (Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) != 0 ||
+                Input.GetAxisRaw(Axis.VERTICAL_AXIS) != 0)
+        {
+
+            player_Anim.Walk(true);
+
+        }
+        else
+        {
+            player_Anim.Walk(false);
+        }
+
+    } // animate player walk
 }

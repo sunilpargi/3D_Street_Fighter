@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ComboState
-{
+public enum ComboState { 
     NONE,
     PUNCH_1,
     PUNCH_2,
@@ -12,10 +11,9 @@ public enum ComboState
     KICK_2
 }
 
-public class PlayerAttack : MonoBehaviour
-{
+public class PlayerAttack : MonoBehaviour {
 
-    private CharaterAnimation player_Anim;
+    private CharacterAnimation player_Anim;
 
     private bool activateTimerToReset;
 
@@ -24,29 +22,24 @@ public class PlayerAttack : MonoBehaviour
 
     private ComboState current_Combo_State;
 
-    void Awake()
-    {
-        player_Anim = GetComponentInChildren<CharaterAnimation>();
+    void Awake() {
+        player_Anim = GetComponentInChildren<CharacterAnimation>();
     }
 
-    void Start()
-    {
+    void Start() {
         current_Combo_Timer = default_Combo_Timer;
         current_Combo_State = ComboState.NONE;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         ComboAttacks();
         ResetComboState();
     }
 
-    void ComboAttacks()
-    {
+    void ComboAttacks() { 
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
+        if(Input.GetKeyDown(KeyCode.Z)) {
 
             if (current_Combo_State == ComboState.PUNCH_3 ||
                 current_Combo_State == ComboState.KICK_1 ||
@@ -57,26 +50,22 @@ public class PlayerAttack : MonoBehaviour
             activateTimerToReset = true;
             current_Combo_Timer = default_Combo_Timer;
 
-            if (current_Combo_State == ComboState.PUNCH_1)
-            {
+            if(current_Combo_State == ComboState.PUNCH_1) {
                 player_Anim.Punch_1();
-                print("Punch1");
             }
 
-            if (current_Combo_State == ComboState.PUNCH_2)
-            {
+            if (current_Combo_State == ComboState.PUNCH_2) {
                 player_Anim.Punch_2();
             }
 
-            if (current_Combo_State == ComboState.PUNCH_3)
-            {
+            if (current_Combo_State == ComboState.PUNCH_3) {
                 player_Anim.Punch_3();
             }
 
         } // if punch
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
+        if (Input.GetKeyDown(KeyCode.X)) {
+            print("X");
 
             // if the current combo is punch 3 or kick 2
             // return meaning exit because we have no combos to perform
@@ -86,16 +75,13 @@ public class PlayerAttack : MonoBehaviour
 
             // if the current combo state is NONE, or punch1 or punch2
             // then we can set current combo state to kick 1 to chain the combo
-            if (current_Combo_State == ComboState.NONE ||
+            if(current_Combo_State == ComboState.NONE ||
                 current_Combo_State == ComboState.PUNCH_1 ||
-                current_Combo_State == ComboState.PUNCH_2)
-            {
+                current_Combo_State == ComboState.PUNCH_2) {
 
                 current_Combo_State = ComboState.KICK_1;
 
-            }
-            else if (current_Combo_State == ComboState.KICK_1)
-            {
+            } else if(current_Combo_State == ComboState.KICK_1) {
                 // move to kick2
                 current_Combo_State++;
             }
@@ -103,13 +89,11 @@ public class PlayerAttack : MonoBehaviour
             activateTimerToReset = true;
             current_Combo_Timer = default_Combo_Timer;
 
-            if (current_Combo_State == ComboState.KICK_1)
-            {
+            if(current_Combo_State == ComboState.KICK_1) {
                 player_Anim.Kick_1();
             }
 
-            if (current_Combo_State == ComboState.KICK_2)
-            {
+            if (current_Combo_State == ComboState.KICK_2) {
                 player_Anim.Kick_2();
             }
 
@@ -120,16 +104,13 @@ public class PlayerAttack : MonoBehaviour
 
     } // combo attacks
 
-    void ResetComboState()
-    {
-
-        if (activateTimerToReset)
-        {
+    void ResetComboState() { 
+    
+        if(activateTimerToReset) {
 
             current_Combo_Timer -= Time.deltaTime;
 
-            if (current_Combo_Timer <= 0f)
-            {
+            if(current_Combo_Timer <= 0f) {
 
                 current_Combo_State = ComboState.NONE;
 
@@ -142,4 +123,36 @@ public class PlayerAttack : MonoBehaviour
 
     } // reset combo state
 
-}
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

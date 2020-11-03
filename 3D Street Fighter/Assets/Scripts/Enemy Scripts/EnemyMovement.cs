@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
-{
-    private CharaterAnimation enemyAnim;
+public class EnemyMovement : MonoBehaviour {
+
+    private CharacterAnimation enemyAnim;
 
     private Rigidbody myBody;
     public float speed = 5f;
@@ -19,54 +19,45 @@ public class EnemyMovement : MonoBehaviour
 
     private bool followPlayer, attackPlayer;
 
-    void Awake()
-    {
-        enemyAnim = GetComponentInChildren<CharaterAnimation>();
+    void Awake() {
+        enemyAnim = GetComponentInChildren<CharacterAnimation>();
         myBody = GetComponent<Rigidbody>();
 
         playerTarget = GameObject.FindWithTag(Tags.PLAYER_TAG).transform;
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         followPlayer = true;
         current_Attack_Time = default_Attack_Time;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Attack();
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         FollowTarget();
     }
 
-    void FollowTarget()
-    {
+    void FollowTarget() {
 
         // if we are not supposed to follow the player
         if (!followPlayer)
             return;
 
-        if (Vector3.Distance(transform.position, playerTarget.position) > attack_Distance)
-        {
+        if(Vector3.Distance(transform.position, playerTarget.position) > attack_Distance) {
 
             transform.LookAt(playerTarget);
             myBody.velocity = transform.forward * speed;
 
-            if (myBody.velocity.sqrMagnitude != 0)
-            {
-                enemyAnim.Walk(true);
+            if(myBody.velocity.sqrMagnitude != 0) {
+                enemyAnim.Walk(true);   
             }
 
 
-        }
-        else if (Vector3.Distance(transform.position, playerTarget.position) <= attack_Distance)
-        {
+        } else if(Vector3.Distance(transform.position, playerTarget.position) <= attack_Distance) {
 
             myBody.velocity = Vector3.zero;
             enemyAnim.Walk(false);
@@ -78,8 +69,7 @@ public class EnemyMovement : MonoBehaviour
 
     } // follow target
 
-    void Attack()
-    {
+    void Attack() {
 
         // if we should NOT attack the player
         // exit the function
@@ -88,8 +78,7 @@ public class EnemyMovement : MonoBehaviour
 
         current_Attack_Time += Time.deltaTime;
 
-        if (current_Attack_Time > default_Attack_Time)
-        {
+        if(current_Attack_Time > default_Attack_Time) {
 
             enemyAnim.EnemyAttack(Random.Range(0, 3));
 
@@ -97,14 +86,49 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        if (Vector3.Distance(transform.position, playerTarget.position) >
-                attack_Distance + chase_Player_After_Attack)
-        {
+        if(Vector3.Distance(transform.position, playerTarget.position) >
+                attack_Distance + chase_Player_After_Attack) {
 
             attackPlayer = false;
             followPlayer = true;
-
+        
         }
 
     } // attack
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

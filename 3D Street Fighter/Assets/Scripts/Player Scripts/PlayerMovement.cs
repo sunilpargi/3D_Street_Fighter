@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
-   // private CharacterAnimation player_Anim;
+public class PlayerMovement : MonoBehaviour {
+
+    private CharacterAnimation player_Anim;
     private Rigidbody myBody;
 
     public float walk_Speed = 2f;
@@ -13,29 +13,23 @@ public class PlayerMovement : MonoBehaviour
     private float rotation_Y = -90f;
     private float rotation_Speed = 15f;
 
-    private CharaterAnimation player_Anim;
-
     // Start is called before the first frame update
-    void Awake()
-    {
+    void Awake() {
         myBody = GetComponent<Rigidbody>();
-        player_Anim = GetComponentInChildren<CharaterAnimation>();
+        player_Anim = GetComponentInChildren<CharacterAnimation>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         RotatePlayer();
         AnimatePlayerWalk();
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         DetectMovement();
     }
 
-    void DetectMovement()
-    {
+    void DetectMovement() {
 
         myBody.velocity = new Vector3(
             Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) * (-walk_Speed),
@@ -44,17 +38,13 @@ public class PlayerMovement : MonoBehaviour
 
     } // movement
 
-    void RotatePlayer()
-    {
+    void RotatePlayer() { 
 
-        if (Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) > 0)
-        {
+        if(Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) > 0) {
 
             transform.rotation = Quaternion.Euler(0f, rotation_Y, 0f);
 
-        }
-        else if (Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) < 0)
-        {
+        } else if(Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) < 0) {
 
             transform.rotation = Quaternion.Euler(0f, Mathf.Abs(rotation_Y), 0f);
 
@@ -62,20 +52,55 @@ public class PlayerMovement : MonoBehaviour
 
     } // rotation
 
-    void AnimatePlayerWalk()
-    {
-
-        if (Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) != 0 ||
-                Input.GetAxisRaw(Axis.VERTICAL_AXIS) != 0)
-        {
+    void AnimatePlayerWalk() { 
+    
+        if(Input.GetAxisRaw(Axis.HORIZONTAL_AXIS) != 0 ||
+                Input.GetAxisRaw(Axis.VERTICAL_AXIS) != 0) {
 
             player_Anim.Walk(true);
-
-        }
-        else
-        {
+    
+        } else {
             player_Anim.Walk(false);
         }
 
     } // animate player walk
-}
+
+} // class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -32,7 +32,7 @@ public class HealthScript : MonoBehaviour {
 
         // display health UI
         if(is_Player) {
-         //   health_UI.DisplayHealth(health);
+           health_UI.DisplayHealth(health);
         }
 
         if (health <= 0f) {
@@ -50,7 +50,7 @@ public class HealthScript : MonoBehaviour {
 
         if(!is_Player) { 
 
-            if(knockDown) { 
+            if(knockDown) {  
 
                 if(Random.Range(0, 2) > 0) {
                     animationScript.KnockDown();
